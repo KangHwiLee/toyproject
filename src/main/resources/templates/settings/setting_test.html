@@ -23,38 +23,40 @@
       <p class="lead">아래 버튼을 누르면 현재 pc에 설치, 환경변수 설정까지 자동으로 완료됩니다.</p>
       <a th:onclick="test()" class="btn btn-primary">자동 설치</a>
     </div>
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
-    <script>
-
-    $(document).ready(function(){
-      test();
-    })
-
-    function test(){
-    console.log("??")
-      $.ajax({
-        url:"/opengpt/send",
-        type : "post",
-        data : {"message" : "hello"},
-        success : function(data){
-          console.log(data);
-        }
-      })
-    }
-
-  </script>
   </main><!-- /.container -->
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
 
 
   </body>
+  <script>
+
+
+  const apiKey = "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";
+const apiUrl = "https://api.openai.com/v1/engine/chat";
+
+fetch(apiUrl, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin" : "http://localhost:8080",
+    Authorization: `Bearer ${apiKey}`,
+  },
+  body: JSON.stringify({
+    prompt: "Hello, how are you?",
+    temperature: 0.5,
+    max_tokens: 50,
+  }),
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.log(error));
+
+
+  </script>
 </html>
